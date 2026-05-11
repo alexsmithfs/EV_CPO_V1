@@ -28,3 +28,42 @@ CREATE TABLE IF NOT EXISTS rev_source_3 (
 	transaction_tag TEXT,
 	cost_type TEXT
 );
+
+----- Incremental load versions -----
+
+-- Option drop table if needing to edit table, but first use ALTER if possible!!
+-- DROP TABLE IF EXISTS rev_source_1;
+CREATE TABLE IF NOT EXISTS rev_source_1_append (
+	transaction_id TEXT,
+	date_timestamp TEXT,
+	charger_id INT,
+	cost FLOAT,
+	transaction_tag TEXT,
+	dwh_date_added TIMESTAMP,
+	dwh_date_updated TIMESTAMP
+);
+
+-- Option drop table if needing to edit table, but first use ALTER if possible!!
+-- DROP TABLE IF EXISTS rev_source_2;
+CREATE TABLE IF NOT EXISTS rev_source_2_append (
+	transaction_id TEXT,
+	date_timestamp TEXT,
+	charger_id INT,
+	cost FLOAT,
+	transaction_tag TEXT,
+	dwh_date_added TIMESTAMP,
+	dwh_date_updated TIMESTAMP
+);
+
+-- Option drop table if needing to edit table, but first use ALTER if possible!!
+-- DROP TABLE IF EXISTS rev_source_3;
+CREATE TABLE IF NOT EXISTS rev_source_3_append (
+	transaction_id TEXT,
+	date_timestamp TEXT,
+	charger_id INT,
+	cost FLOAT,
+	transaction_tag TEXT,
+	cost_type TEXT,
+	dwh_date_added TIMESTAMP,
+	dwh_date_updated TIMESTAMP
+);
