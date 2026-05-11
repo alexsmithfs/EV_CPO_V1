@@ -1,1 +1,30 @@
+-- Option drop table if needing to edit table, but first use ALTER if possible!!
+-- DROP TABLE IF EXISTS rev_source_1;
+CREATE TABLE IF NOT EXISTS rev_source_1 (
+	transaction_id TEXT,
+	date_timestamp TEXT,
+	charger_id INT,
+	cost FLOAT,
+	transaction_tag TEXT
+);
 
+-- Option drop table if needing to edit table, but first use ALTER if possible!!
+-- DROP TABLE IF EXISTS rev_source_2;
+CREATE TABLE IF NOT EXISTS rev_source_2 (
+	transaction_id TEXT,
+	date_timestamp TEXT,
+	charger_id INT,
+	cost FLOAT,
+	transaction_tag TEXT
+);
+
+-- Option drop table if needing to edit table, but first use ALTER if possible!!
+-- DROP TABLE IF EXISTS rev_source_3;
+CREATE TABLE IF NOT EXISTS rev_source_3 (
+	transaction_id TEXT,
+	date_timestamp TEXT,
+	charger_id INT,
+	cost FLOAT,
+	transaction_tag TEXT,
+	cost_type TEXT
+);
