@@ -1,5 +1,5 @@
 from extract_functions import extract_csv
-from load_functions import load_db, load_db_append 
+from load_functions import load_db, load_db_rev_src_1_append, load_db_rev_src_2_append, load_db_rev_src_3_append
 
 # Extract
 # _____________________________________________________________________________________________
@@ -16,8 +16,6 @@ load_db(raw_rev_1_data, 'rev_source_1')
 load_db(raw_rev_2_data, 'rev_source_2')
 load_db(raw_rev_3_data, 'rev_source_3')
 
-load_db_append('rev_source_1')
-load_db_append('rev_source_2')
-load_db_append('rev_source_3')
-
-print("testtttt")
+load_db_rev_src_1_append()
+load_db_rev_src_2_append()
+load_db_rev_src_3_append()

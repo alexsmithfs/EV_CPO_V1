@@ -15,12 +15,16 @@ engine = create_engine(f"postgresql://{db_config['user']}:{db_config['password']
 # _____________________________________________________________________________________________
 
 # Function to load data into SQL database
+# _________________________________________________________
 def load_db(df, table_name):
     df.to_sql(table_name, engine, if_exists='replace', index=False)
 
 
-# Function to append only new records from the main table to the append table
-def load_db_append(table_name):
+# Function for table rev_source_1 ONLY to append only new records from the main table to the append table
+# _________________________________________________________
+def load_db_rev_src_1_append():
+
+    table_name = "rev_source_1"
 
     table_name_append = f"{table_name}_append"
 
@@ -31,19 +35,24 @@ def load_db_append(table_name):
             date_timestamp, 
             charger_id, 
             cost, 
-            dwh_date_added
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
         )
         SELECT 
-            t.transaction_id, 
-            t.date_timestamp, 
-            t.charger_id, 
-            t.cost, 
-            NOW() AS dwh_date_added
-        FROM {table_name} t
-        LEFT JOIN {table_name_append} t_append
-            ON (t.transaction_id = t_append.transaction_id) AND (t.date_timestamp = t_append.date_timestamp) AND (t.charger_id = t_append.charger_id) AND (t.cost = t_append.cost)
-        WHERE t_append.transaction_id IS NULL
-        ;
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM {table_name}
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE {table_name_append}.cost IS DISTINCT FROM EXCLUDED.cost;
     """)
 
     # Use engine.begin() to ensure the transaction is committed
@@ -51,6 +60,89 @@ def load_db_append(table_name):
         result = connection.execute(sql_command)
         print(f"Transfer complete. Appended {result.rowcount} new records from {table_name} to {table_name_append}.")
 
+# Function for table rev_source_2 ONLY to append only new records from the main table to the append table
+# _________________________________________________________
+def load_db_rev_src_2_append():
+
+    table_name = "rev_source_2"
+
+    table_name_append = f"{table_name}_append"
+
+    # This SQL command does the work internally in Postgres
+    sql_command = text(f"""
+        INSERT INTO {table_name_append} (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM {table_name}
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE {table_name_append}.cost IS DISTINCT FROM EXCLUDED.cost;
+    """)
+
+    # Use engine.begin() to ensure the transaction is committed
+    with engine.begin() as connection:
+        result = connection.execute(sql_command)
+        print(f"Transfer complete. Appended {result.rowcount} new records from {table_name} to {table_name_append}.")
+
+# Function for table rev_source_3 ONLY to append only new records from the main table to the append table
+# _________________________________________________________
+def load_db_rev_src_3_append():
+
+    table_name = "rev_source_3"
+
+    table_name_append = f"{table_name}_append"
+
+    # This SQL command does the work internally in Postgres
+    sql_command = text(f"""
+        INSERT INTO {table_name_append} (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            cost_type,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            cost_type,
+            NOW(),
+            NULL
+        FROM {table_name}
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            cost_type = EXCLUDED.cost_type,
+            dwh_date_updated = NOW()
+        WHERE {table_name_append}.cost IS DISTINCT FROM EXCLUDED.cost
+        ;
+    """)
+
+    # Use engine.begin() to ensure the transaction is committed
+    with engine.begin() as connection:
+        result = connection.execute(sql_command)
+        print(f"Transfer complete. Appended {result.rowcount} new records from {table_name} to {table_name_append}.")
 
 # Testing 
 # _____________________________________________________________________________________________
@@ -63,4 +155,4 @@ if __name__ == "__main__":
     print(raw_data.info())
 
     load_db(raw_data, 'rev_source_3')
-    load_db_append('rev_source_3') 
+    load_db_rev_src_3_append()
