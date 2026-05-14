@@ -8,3 +8,13 @@
 2026-05-12 19:46:06,857 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
 2026-05-12 19:46:06,859 - INFO - Loading rev_source_3 into database
 2026-05-12 19:46:06,889 - INFO - Appending rev_source_3 to appended table
+2026-05-14 10:47:51,506 - INFO - Starting ETL Pipeline
+2026-05-14 10:47:51,506 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-14 10:47:51,516 - INFO - Loading rev_source_1 into database
+2026-05-14 10:47:51,845 - INFO - Appending rev_source_1 to appended table
+2026-05-14 10:47:51,851 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-14 10:47:51,861 - INFO - Loading rev_source_2 into database
+2026-05-14 10:47:51,890 - INFO - Appending rev_source_2 to appended table
+2026-05-14 10:47:51,895 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-14 10:47:51,903 - INFO - Loading rev_source_3 into database
+2026-05-14 10:47:51,933 - INFO - Appending rev_source_3 to appended table
