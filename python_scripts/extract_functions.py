@@ -1,15 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine, text
 
-db_config = {
-    "user": "postgres",
-    "password": "Alexsm97",
-    "host": "localhost",
-    "port": "5432",
-    "database": "EV_CPO_DB"
-}
-
-engine = create_engine(f"postgresql://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
 
 # Functions
 # _____________________________________________________________________________________________
@@ -23,6 +14,16 @@ def extract_csv(file_path):
 # Extracting ONLY new and updated records from revenue tables in database for cleaning process
 # _________________________________________________________
 def extract_db_new_updated_rev(table_name):
+
+    db_config = {
+    "user": "postgres",
+    "password": "Alexsm97",
+    "host": "localhost",
+    "port": "5432",
+    "database": "EV_CPO_DB"
+    }
+
+    engine = create_engine(f"postgresql://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
 
     append_table = table_name
     clean_table = append_table.replace("_append", "_clean")
