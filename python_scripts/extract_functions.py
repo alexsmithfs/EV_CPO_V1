@@ -20,48 +20,34 @@ def extract_csv(file_path):
     raw_data = pd.read_csv(file_path)
     return raw_data
 
-# Extracting ONLY new and updated records for cleaning process
+# Extracting ONLY new and updated records from revenue tables in database for cleaning process
 # _________________________________________________________
-def extract_csv_new_updated(table_name):
+def extract_db_new_updated_rev(table_name):
+
+    append_table = table_name
+    clean_table = append_table.replace("_append", "_clean")
 
     # This SQL command does the work internally in Postgres
-    sql_command = text(f"""
-        SELECT 
-            transaction_id, 
-            date_timestamp, 
-            charger_id, 
-            cost, 
-            transaction_tag,
-            cost_type,
-            dwh_date_added,
-            dwh_date_updated
-        FROM {table_name}
-        WHERE (transaction_id, date_timestamp, charger_id) IN (
-            SELECT transaction_id, date_timestamp, charger_id
-            FROM {table_name}
-            EXCEPT
-            SELECT transaction_id, date_timestamp, charger_id
-            FROM {table_name}_append
-        )
-        OR (transaction_id, date_timestamp, charger_id) IN (
-            SELECT transaction_id, date_timestamp, charger_id
-            FROM {table_name}
-            INTERSECT
-            SELECT transaction_id, date_timestamp, charger_id
-            FROM {table_name}_append
-        ) AND cost IS DISTINCT FROM (
-            SELECT cost 
-            FROM {table_name}_append AS append_table
-            WHERE append_table.transaction_id = {table_name}.transaction_id 
-              AND append_table.date_timestamp = {table_name}.date_timestamp 
-              AND append_table.charger_id = {table_name}.charger_id
-        );
-    """)
+    sql_query = f"""
+        SELECT
+            r_append.*
+        FROM {append_table} r_append
 
-    # Use engine.begin() to ensure the transaction is committed
-    with engine.begin() as connection:
-        result = connection.execute(sql_command)
-        new_updated_data = result.fetchall()
-        print(f"Extracted {len(new_updated_data)} new and updated records from {table_name} for cleaning process.")
+        LEFT JOIN {clean_table} r_clean
+            ON r_append.transaction_id = r_clean.transaction_id
+            AND r_append.charger_id = r_clean.charger_id
+            AND r_append.date_timestamp = r_clean.date_timestamp
+
+        WHERE
+            r_clean.transaction_id IS NULL
+            OR 
+            r_append.cost != r_clean.cost
+    """
+
+    rev_data = pd.read_sql_query(sql_query, engine)
     
-    return new_updated_data
+    return rev_data
+
+if __name__ == "__main__":
+
+    print(extract_db_new_updated_rev("rev_source_1_append"))

@@ -51,6 +51,7 @@ def load_db_rev_src_1_append():
         ON CONFLICT (transaction_id, date_timestamp, charger_id) 
         DO UPDATE SET
             cost = EXCLUDED.cost,
+            transaction_tag = EXCLUDED.transaction_tag,
             dwh_date_updated = NOW()
         WHERE {table_name_append}.cost IS DISTINCT FROM EXCLUDED.cost;
     """)
@@ -91,6 +92,7 @@ def load_db_rev_src_2_append():
         ON CONFLICT (transaction_id, date_timestamp, charger_id) 
         DO UPDATE SET
             cost = EXCLUDED.cost,
+            transaction_tag = EXCLUDED.transaction_tag,
             dwh_date_updated = NOW()
         WHERE {table_name_append}.cost IS DISTINCT FROM EXCLUDED.cost;
     """)
@@ -133,6 +135,7 @@ def load_db_rev_src_3_append():
         ON CONFLICT (transaction_id, date_timestamp, charger_id) 
         DO UPDATE SET
             cost = EXCLUDED.cost,
+            transaction_tag = EXCLUDED.transaction_tag,
             cost_type = EXCLUDED.cost_type,
             dwh_date_updated = NOW()
         WHERE {table_name_append}.cost IS DISTINCT FROM EXCLUDED.cost
