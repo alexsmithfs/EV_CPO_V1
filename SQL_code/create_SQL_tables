@@ -1,5 +1,7 @@
+----- Raw Data versions -----
+
 -- Option drop table if needing to edit table, but first use ALTER if possible!!
--- DROP TABLE IF EXISTS rev_source_1;
+DROP TABLE IF EXISTS rev_source_1;
 CREATE TABLE IF NOT EXISTS rev_source_1 (
 	transaction_id TEXT,
 	date_timestamp TEXT,
@@ -9,7 +11,7 @@ CREATE TABLE IF NOT EXISTS rev_source_1 (
 );
 
 -- Option drop table if needing to edit table, but first use ALTER if possible!!
--- DROP TABLE IF EXISTS rev_source_2;
+DROP TABLE IF EXISTS rev_source_2;
 CREATE TABLE IF NOT EXISTS rev_source_2 (
 	transaction_id TEXT,
 	date_timestamp TEXT,
@@ -19,7 +21,7 @@ CREATE TABLE IF NOT EXISTS rev_source_2 (
 );
 
 -- Option drop table if needing to edit table, but first use ALTER if possible!!
--- DROP TABLE IF EXISTS rev_source_3;
+DROP TABLE IF EXISTS rev_source_3;
 CREATE TABLE IF NOT EXISTS rev_source_3 (
 	transaction_id TEXT,
 	date_timestamp TEXT,
@@ -32,7 +34,7 @@ CREATE TABLE IF NOT EXISTS rev_source_3 (
 ----- Incremental load versions -----
 
 -- Option drop table if needing to edit table, but first use ALTER if possible!!
--- DROP TABLE IF EXISTS rev_source_1_append;
+DROP TABLE IF EXISTS rev_source_1_append;
 CREATE TABLE IF NOT EXISTS rev_source_1_append (
 	transaction_id TEXT,
 	date_timestamp TEXT,
@@ -42,9 +44,12 @@ CREATE TABLE IF NOT EXISTS rev_source_1_append (
 	dwh_date_added TIMESTAMP,
 	dwh_date_updated TIMESTAMP
 );
+ALTER TABLE rev_source_1_append 
+ADD CONSTRAINT unique_tx_date_charger_1
+UNIQUE (transaction_id, date_timestamp, charger_id);
 
 -- Option drop table if needing to edit table, but first use ALTER if possible!!
--- DROP TABLE IF EXISTS rev_source_2_append;
+DROP TABLE IF EXISTS rev_source_2_append;
 CREATE TABLE IF NOT EXISTS rev_source_2_append (
 	transaction_id TEXT,
 	date_timestamp TEXT,
@@ -54,9 +59,12 @@ CREATE TABLE IF NOT EXISTS rev_source_2_append (
 	dwh_date_added TIMESTAMP,
 	dwh_date_updated TIMESTAMP
 );
+ALTER TABLE rev_source_2_append 
+ADD CONSTRAINT unique_tx_date_charger_2
+UNIQUE (transaction_id, date_timestamp, charger_id);
 
 -- Option drop table if needing to edit table, but first use ALTER if possible!!
--- DROP TABLE IF EXISTS rev_source_3_append;
+DROP TABLE IF EXISTS rev_source_3_append;
 CREATE TABLE IF NOT EXISTS rev_source_3_append (
 	transaction_id TEXT,
 	date_timestamp TEXT,
@@ -64,6 +72,44 @@ CREATE TABLE IF NOT EXISTS rev_source_3_append (
 	cost FLOAT,
 	transaction_tag TEXT,
 	cost_type TEXT,
+	dwh_date_added TIMESTAMP,
+	dwh_date_updated TIMESTAMP
+);
+ALTER TABLE rev_source_3_append 
+ADD CONSTRAINT unique_tx_date_charger_3
+UNIQUE (transaction_id, date_timestamp, charger_id);
+
+----- Clean data table versions -----
+
+-- Option drop table if needing to edit table, but first use ALTER if possible!!
+DROP TABLE IF EXISTS rev_source_1_clean;
+CREATE TABLE IF NOT EXISTS rev_source_1_clean (
+	transaction_id TEXT,
+	date_timestamp TEXT,
+	charger_id TEXT,
+	cost FLOAT,
+	dwh_date_added TIMESTAMP,
+	dwh_date_updated TIMESTAMP
+);
+
+-- Option drop table if needing to edit table, but first use ALTER if possible!!
+DROP TABLE IF EXISTS rev_source_2_clean;
+CREATE TABLE IF NOT EXISTS rev_source_2_clean (
+	transaction_id TEXT,
+	date_timestamp TEXT,
+	charger_id TEXT,
+	cost FLOAT,
+	dwh_date_added TIMESTAMP,
+	dwh_date_updated TIMESTAMP
+);
+
+-- Option drop table if needing to edit table, but first use ALTER if possible!!
+DROP TABLE IF EXISTS rev_source_3_clean;
+CREATE TABLE IF NOT EXISTS rev_source_3_clean (
+	transaction_id TEXT,
+	date_timestamp TEXT,
+	charger_id TEXT,
+	cost FLOAT,
 	dwh_date_added TIMESTAMP,
 	dwh_date_updated TIMESTAMP
 );
