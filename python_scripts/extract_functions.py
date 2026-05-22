@@ -36,7 +36,7 @@ def extract_db_new_updated_rev(table_name):
 
         LEFT JOIN {clean_table} r_clean
             ON r_append.transaction_id = r_clean.transaction_id
-            AND r_append.charger_id = r_clean.charger_id
+            AND CAST(r_append.charger_id AS TEXT)= r_clean.charger_id
             AND r_append.date_timestamp = r_clean.date_timestamp
 
         WHERE

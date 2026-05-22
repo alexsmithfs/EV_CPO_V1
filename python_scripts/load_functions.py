@@ -147,6 +147,51 @@ def load_db_rev_src_3_append():
         result = connection.execute(sql_command)
         print(f"Transfer complete. Appended {result.rowcount} new records from {table_name} to {table_name_append}.")
 
+# Function to load temporary staging table for revenue data for cleaning process
+# _________________________________________________________
+
+def load_db_rev_staging(df):
+
+    table_name = "rev_staging"
+
+    df.to_sql(table_name, engine, if_exists='replace', index=False)
+
+# Function to load ONLY to append only new records into clean table 
+# _________________________________________________________
+def load_db_rev_clean(table_name):
+
+    staging_table = "rev_staging"
+
+    # This SQL command does the work internally in Postgres
+    sql_command = text(f"""
+        INSERT INTO {table_name} (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            NOW(),
+            NULL
+        FROM {staging_table}
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE {table_name}.cost IS DISTINCT FROM EXCLUDED.cost;
+    """)
+
+    # Use engine.begin() to ensure the transaction is committed
+    with engine.begin() as connection:
+        result = connection.execute(sql_command)
+        print(f"Transfer complete. Appended {result.rowcount} new records from {staging_table} to {table_name}.")
+
 # Testing 
 # _____________________________________________________________________________________________
 
