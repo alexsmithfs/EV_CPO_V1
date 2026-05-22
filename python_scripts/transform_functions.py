@@ -3,6 +3,7 @@ from extract_functions import extract_db_new_updated_rev
 
 # Imports
 import pandas as pd
+import numpy as np
 
 # Tranasformation Functions
 # _____________________________________________________________________________________________
@@ -12,18 +13,60 @@ import pandas as pd
 # _________________________________________________________
 
 def transform_rev_src_1(df):
-        # Converting df to DataFrame to use pandas functions
-        df = pd.DataFrame(df)
+    # Converting df to DataFrame to use pandas functions
+    df = pd.DataFrame(df)
 
-        # Filtering only to transactions that have succeeded or are Pending. We do not want to include failed transactions in our analysis
-        df = df[df['transaction_tag'].isin(['Succeeded', 'Pending'])]
+    # Filtering only to transactions that have succeeded or are Pending. We do not want to include failed transactions in our analysis
+    df = df[df['transaction_tag'].isin(['Succeeded', 'Pending'])]
 
-        # Update the 'cost' column for 'Pending' transactions as we haven't actually recieved payment yet.
-        df.loc[df['transaction_tag'] == 'Pending', 'cost'] = 0
+    # Update the 'cost' column for 'Pending' transactions as we haven't actually recieved payment yet.
+    df.loc[df['transaction_tag'] == 'Pending', 'cost'] = 0
 
-        return df
+    return df
 
-# Generic transform function for revenue data
+# Transformation for rev source 2
+# _________________________________________________________
+
+def transform_rev_src_2(df):
+    # Converting df to DataFrame to use pandas functions
+    df = pd.DataFrame(df)
+
+    # Filtering only to transactions that have succeeded or are Pending. We do not want to include failed transactions in our analysis
+    df = df[df['transaction_tag'].isin(['Succeeded', 'Pending'])]
+
+    # Update the 'cost' column for 'Pending' transactions as we haven't actually recieved payment yet.
+    df.loc[df['transaction_tag'] == 'Pending', 'cost'] = 0
+
+    return df
+
+# Transformation for rev source 3
+# _________________________________________________________
+
+def transform_rev_src_3(df):
+    # Converting df to DataFrame to use pandas functions
+    df = pd.DataFrame(df)
+
+    # Filtering only to transactions that have succeeded or are Pending. We do not want to include failed transactions in our analysis
+    df = df[df['transaction_tag'].isin(['Succeeded', 'Pending', 'Refunded'])]
+
+    # Update the 'cost' column for 'Pending' transactions as we haven't actually recieved payment yet.
+    df.loc[df['transaction_tag'] == 'Pending', 'cost'] = 0
+
+    # If 'cost_type' is REFUND, multiply by -1, otherwise multiply by 1
+    df["net_cost"] = df["cost"] * np.where(df["cost_type"] == "REFUND", -1, 1)
+    
+    # Group and sum
+    cleaned_df = (
+        df.groupby(["transaction_id", "charger_id"], as_index=False)
+        .agg(
+            cost=("net_cost", "sum"),
+            date_timestamp=("date_timestamp", "min"),  # Get the latest timestamp for each transaction_id and charger_id
+        )
+    )
+    
+    return cleaned_df
+
+# Function for transforming revnue sources that have already had the initial cleaning phase done
 # _________________________________________________________
 
 def transform_rev_data(df):
@@ -50,9 +93,9 @@ def transform_rev_data(df):
 
 if __name__ == "__main__":
 
-    rev_1_df = extract_db_new_updated_rev("rev_source_1_append")
-    print(rev_1_df[rev_1_df['transaction_tag'] == 'Pending'].head())
-    transformed_rev_1_df = transform_rev_src_1(rev_1_df)
-    print(transformed_rev_1_df[transformed_rev_1_df['transaction_tag'] == 'Pending'].head())
-    final_rev_1_df = transform_rev_data(transformed_rev_1_df)
-    print(final_rev_1_df[final_rev_1_df['transaction_id'] == 'TXN-100279'])
+    rev_3_df = extract_db_new_updated_rev("rev_source_3_append")
+    print(rev_3_df[rev_3_df['transaction_id'] == 'TXN-300374'])
+    transformed_rev_3_df = transform_rev_src_3(rev_3_df)
+    print(transformed_rev_3_df[transformed_rev_3_df['transaction_id'] == 'TXN-300374'])
+    final_rev_3_df = transform_rev_data(transformed_rev_3_df)
+    print(final_rev_3_df[final_rev_3_df['transaction_id'] == 'TXN-300374'])
