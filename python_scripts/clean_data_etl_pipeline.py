@@ -24,18 +24,13 @@ def run_pipeline_rev_src_1():
     try:
         # Extracting only new and updated records from rev_source_1_append for cleaning process
         new_data = extract_db_new_updated_rev("rev_source_1_append")
-        print(new_data.head())
         # Transforming the new/updated records to clean data
         transformed_data = transform_rev_src_1(new_data)
-        print("transformed_data")
         cleaned_data = transform_rev_data(transformed_data)
-        print("cleaned_data")
         # Loading cleaned data to staging table
         load_db_rev_staging(cleaned_data)
-        print("load_db_rev_staging")
         # Loading only new records to clean table
         load_db_rev_clean("rev_source_1_clean")
-        print("load_db_rev_clean")
 
     except Exception as e:
         logger.error("Pipeline for Cleaning revenue Source 1 failed!", exc_info=True)
