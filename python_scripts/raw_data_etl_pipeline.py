@@ -21,7 +21,9 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+# _____________________________________________________________________________________________
 # rev_source 1 pipeline
+
 def run_pipeline_rev_src_1():
     try:
         file_path = R'C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv'
@@ -37,7 +39,9 @@ def run_pipeline_rev_src_1():
         # add the below line when we have encorporated Spark
         #sys.exit(1)
 
+# _____________________________________________________________________________________________
 # rev_source 2 pipeline
+
 def run_pipeline_rev_src_2():
     try:
         file_path = R'C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv'
@@ -53,7 +57,9 @@ def run_pipeline_rev_src_2():
         # add the below line when we have encorporated Spark
         #sys.exit(1)
 
+# _____________________________________________________________________________________________
 # rev_source 3 pipeline
+
 def run_pipeline_rev_src_3():
     try:
         file_path = R'C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv'
@@ -68,6 +74,9 @@ def run_pipeline_rev_src_3():
         logger.error("Pipeline for Revenue Source 3 failed!", exc_info=True)
         # add the below line when we have encorporated Spark
         #sys.exit(1)
+
+
+# _____________________________________________________________________________________________
 
 if __name__ == "__main__":
     logger.info("Starting ETL Pipeline")

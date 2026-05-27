@@ -8,3 +8,1413 @@
 2026-05-12 19:46:06,857 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
 2026-05-12 19:46:06,859 - INFO - Loading rev_source_3 into database
 2026-05-12 19:46:06,889 - INFO - Appending rev_source_3 to appended table
+2026-05-14 10:47:51,506 - INFO - Starting ETL Pipeline
+2026-05-14 10:47:51,506 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-14 10:47:51,516 - INFO - Loading rev_source_1 into database
+2026-05-14 10:47:51,845 - INFO - Appending rev_source_1 to appended table
+2026-05-14 10:47:51,851 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-14 10:47:51,861 - INFO - Loading rev_source_2 into database
+2026-05-14 10:47:51,890 - INFO - Appending rev_source_2 to appended table
+2026-05-14 10:47:51,895 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-14 10:47:51,903 - INFO - Loading rev_source_3 into database
+2026-05-14 10:47:51,933 - INFO - Appending rev_source_3 to appended table
+2026-05-14 11:42:50,529 - INFO - Starting ETL Pipeline
+2026-05-14 11:42:50,530 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-14 11:42:50,538 - INFO - Loading rev_source_1 into database
+2026-05-14 11:42:50,700 - INFO - Appending rev_source_1 to appended table
+2026-05-14 11:42:50,703 - ERROR - Pipeline for Revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\raw_data_etl_pipeline.py", line 33, in run_pipeline_rev_src_1
+    load_db_rev_src_1_append()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 60, in load_db_rev_src_1_append
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InvalidColumnReference) there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+[SQL: 
+        INSERT INTO rev_source_1_append (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM rev_source_1
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_1_append.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-14 11:42:50,743 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-14 11:42:50,750 - INFO - Loading rev_source_2 into database
+2026-05-14 11:42:50,774 - INFO - Appending rev_source_2 to appended table
+2026-05-14 11:42:50,775 - ERROR - Pipeline for Revenue Source 2 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\raw_data_etl_pipeline.py", line 49, in run_pipeline_rev_src_2
+    load_db_rev_src_2_append()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 100, in load_db_rev_src_2_append
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InvalidColumnReference) there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+[SQL: 
+        INSERT INTO rev_source_2_append (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM rev_source_2
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_2_append.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-14 11:42:50,777 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-14 11:42:50,785 - INFO - Loading rev_source_3 into database
+2026-05-14 11:42:50,810 - INFO - Appending rev_source_3 to appended table
+2026-05-14 11:42:50,811 - ERROR - Pipeline for Revenue Source 3 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\raw_data_etl_pipeline.py", line 65, in run_pipeline_rev_src_3
+    load_db_rev_src_3_append()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 144, in load_db_rev_src_3_append
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InvalidColumnReference) there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+[SQL: 
+        INSERT INTO rev_source_3_append (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            cost_type,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            cost_type,
+            NOW(),
+            NULL
+        FROM rev_source_3
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            cost_type = EXCLUDED.cost_type,
+            dwh_date_updated = NOW()
+        WHERE rev_source_3_append.cost IS DISTINCT FROM EXCLUDED.cost
+        ;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-14 11:44:25,248 - INFO - Starting ETL Pipeline
+2026-05-14 11:44:25,248 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-14 11:44:25,251 - INFO - Loading rev_source_1 into database
+2026-05-14 11:44:25,452 - INFO - Appending rev_source_1 to appended table
+2026-05-14 11:44:25,454 - ERROR - Pipeline for Revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\raw_data_etl_pipeline.py", line 33, in run_pipeline_rev_src_1
+    load_db_rev_src_1_append()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 60, in load_db_rev_src_1_append
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InvalidColumnReference) there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+[SQL: 
+        INSERT INTO rev_source_1_append (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM rev_source_1
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_1_append.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-14 11:44:25,457 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-14 11:44:25,459 - INFO - Loading rev_source_2 into database
+2026-05-14 11:44:25,490 - INFO - Appending rev_source_2 to appended table
+2026-05-14 11:44:25,492 - ERROR - Pipeline for Revenue Source 2 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\raw_data_etl_pipeline.py", line 49, in run_pipeline_rev_src_2
+    load_db_rev_src_2_append()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 100, in load_db_rev_src_2_append
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InvalidColumnReference) there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+[SQL: 
+        INSERT INTO rev_source_2_append (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM rev_source_2
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_2_append.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-14 11:44:25,494 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-14 11:44:25,496 - INFO - Loading rev_source_3 into database
+2026-05-14 11:44:25,529 - INFO - Appending rev_source_3 to appended table
+2026-05-14 11:49:12,410 - INFO - Starting ETL Pipeline
+2026-05-14 11:49:12,410 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-14 11:49:12,413 - INFO - Loading rev_source_1 into database
+2026-05-14 11:49:12,505 - INFO - Appending rev_source_1 to appended table
+2026-05-14 11:49:12,510 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-14 11:49:12,512 - INFO - Loading rev_source_2 into database
+2026-05-14 11:49:12,535 - INFO - Appending rev_source_2 to appended table
+2026-05-14 11:49:12,541 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-14 11:49:12,542 - INFO - Loading rev_source_3 into database
+2026-05-14 11:49:12,565 - INFO - Appending rev_source_3 to appended table
+2026-05-22 11:37:41,258 - ERROR - Pipeline for Cleaning revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "transaction_tag" does not exist
+LINE 16:             transaction_tag,
+                     ^
+DETAIL:  There is a column named "transaction_tag" in table "rev_source_1_clean", but it cannot be referenced from this part of the query.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\clean_data_etl_pipeline.py", line 33, in run_pipeline_rev_src_1
+    load_db_rev_clean("rev_source_1_clean")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 194, in load_db_rev_clean
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "transaction_tag" does not exist
+LINE 16:             transaction_tag,
+                     ^
+DETAIL:  There is a column named "transaction_tag" in table "rev_source_1_clean", but it cannot be referenced from this part of the query.
+
+[SQL: 
+        INSERT INTO rev_source_1_clean (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM rev_staging
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_1_clean.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-22 11:39:32,093 - ERROR - Pipeline for Cleaning revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "transaction_tag" does not exist
+LINE 16:             transaction_tag,
+                     ^
+DETAIL:  There is a column named "transaction_tag" in table "rev_source_1_clean", but it cannot be referenced from this part of the query.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\clean_data_etl_pipeline.py", line 34, in run_pipeline_rev_src_1
+    load_db_rev_clean("rev_source_1_clean")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 194, in load_db_rev_clean
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "transaction_tag" does not exist
+LINE 16:             transaction_tag,
+                     ^
+DETAIL:  There is a column named "transaction_tag" in table "rev_source_1_clean", but it cannot be referenced from this part of the query.
+
+[SQL: 
+        INSERT INTO rev_source_1_clean (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM rev_staging
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_1_clean.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-22 11:40:43,194 - ERROR - Pipeline for Cleaning revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "transaction_tag" does not exist
+LINE 16:             transaction_tag,
+                     ^
+DETAIL:  There is a column named "transaction_tag" in table "rev_source_1_clean", but it cannot be referenced from this part of the query.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\clean_data_etl_pipeline.py", line 34, in run_pipeline_rev_src_1
+    load_db_rev_clean("rev_source_1_clean")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 194, in load_db_rev_clean
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "transaction_tag" does not exist
+LINE 16:             transaction_tag,
+                     ^
+DETAIL:  There is a column named "transaction_tag" in table "rev_source_1_clean", but it cannot be referenced from this part of the query.
+
+[SQL: 
+        INSERT INTO rev_source_1_clean (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM rev_staging
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_1_clean.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-22 11:41:53,507 - ERROR - Pipeline for Cleaning revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "transaction_tag" does not exist
+LINE 16:             transaction_tag,
+                     ^
+DETAIL:  There is a column named "transaction_tag" in table "rev_source_1_clean", but it cannot be referenced from this part of the query.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\clean_data_etl_pipeline.py", line 37, in run_pipeline_rev_src_1
+    load_db_rev_clean("rev_source_1_clean")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 194, in load_db_rev_clean
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "transaction_tag" does not exist
+LINE 16:             transaction_tag,
+                     ^
+DETAIL:  There is a column named "transaction_tag" in table "rev_source_1_clean", but it cannot be referenced from this part of the query.
+
+[SQL: 
+        INSERT INTO rev_source_1_clean (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            transaction_tag,
+            NOW(),
+            NULL
+        FROM rev_staging
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_1_clean.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-22 11:43:31,763 - ERROR - Pipeline for Cleaning revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "charger_id" is of type integer but expression is of type text
+LINE 13:             charger_id, 
+                     ^
+HINT:  You will need to rewrite or cast the expression.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\clean_data_etl_pipeline.py", line 37, in run_pipeline_rev_src_1
+    load_db_rev_clean("rev_source_1_clean")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 192, in load_db_rev_clean
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DatatypeMismatch) column "charger_id" is of type integer but expression is of type text
+LINE 13:             charger_id, 
+                     ^
+HINT:  You will need to rewrite or cast the expression.
+
+[SQL: 
+        INSERT INTO rev_source_1_clean (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            NOW(),
+            NULL
+        FROM rev_staging
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_1_clean.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-22 11:49:13,507 - ERROR - Pipeline for Cleaning revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.DatatypeMismatch: column "charger_id" is of type integer but expression is of type text
+LINE 13:             charger_id, 
+                     ^
+HINT:  You will need to rewrite or cast the expression.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\clean_data_etl_pipeline.py", line 37, in run_pipeline_rev_src_1
+    load_db_rev_clean("rev_source_1_clean")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 192, in load_db_rev_clean
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DatatypeMismatch) column "charger_id" is of type integer but expression is of type text
+LINE 13:             charger_id, 
+                     ^
+HINT:  You will need to rewrite or cast the expression.
+
+[SQL: 
+        INSERT INTO rev_source_1_clean (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            NOW(),
+            NULL
+        FROM rev_staging
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_1_clean.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-22 11:53:13,050 - INFO - Starting ETL Pipeline
+2026-05-22 11:53:13,050 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-22 11:53:13,062 - INFO - Loading rev_source_1 into database
+2026-05-22 11:53:13,181 - INFO - Appending rev_source_1 to appended table
+2026-05-22 11:53:13,188 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-22 11:53:13,198 - INFO - Loading rev_source_2 into database
+2026-05-22 11:53:13,233 - INFO - Appending rev_source_2 to appended table
+2026-05-22 11:53:13,239 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-22 11:53:13,249 - INFO - Loading rev_source_3 into database
+2026-05-22 11:53:13,281 - INFO - Appending rev_source_3 to appended table
+2026-05-22 11:53:23,309 - ERROR - Pipeline for Cleaning revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedFunction: operator does not exist: integer = text
+LINE 8:             AND r_append.charger_id = r_clean.charger_id
+                                            ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\io\sql.py", line 1679, in execute
+    return execute_function(sql, *args)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1779, in exec_driver_sql
+    ret = self._execute_context(
+        dialect,
+    ...<5 lines>...
+        distilled_parameters,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedFunction) operator does not exist: integer = text
+LINE 8:             AND r_append.charger_id = r_clean.charger_id
+                                            ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+[SQL: 
+        SELECT
+            r_append.*
+        FROM rev_source_1_append r_append
+
+        LEFT JOIN rev_source_1_clean r_clean
+            ON r_append.transaction_id = r_clean.transaction_id
+            AND r_append.charger_id = r_clean.charger_id
+            AND r_append.date_timestamp = r_clean.date_timestamp
+
+        WHERE
+            r_clean.transaction_id IS NULL
+            OR 
+            r_append.cost != r_clean.cost
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\clean_data_etl_pipeline.py", line 26, in run_pipeline_rev_src_1
+    new_data = extract_db_new_updated_rev("rev_source_1_append")
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\extract_functions.py", line 48, in extract_db_new_updated_rev
+    rev_data = pd.read_sql_query(sql_query, engine)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\io\sql.py", line 497, in read_sql_query
+    return pandas_sql.read_query(
+           ~~~~~~~~~~~~~~~~~~~~~^
+        sql,
+        ^^^^
+    ...<6 lines>...
+        dtype_backend=dtype_backend,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\io\sql.py", line 1856, in read_query
+    result = self.execute(sql, params)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\io\sql.py", line 1681, in execute
+    raise DatabaseError(f"Execution failed on sql '{sql}': {exc}") from exc
+pandas.errors.DatabaseError: Execution failed on sql '
+        SELECT
+            r_append.*
+        FROM rev_source_1_append r_append
+
+        LEFT JOIN rev_source_1_clean r_clean
+            ON r_append.transaction_id = r_clean.transaction_id
+            AND r_append.charger_id = r_clean.charger_id
+            AND r_append.date_timestamp = r_clean.date_timestamp
+
+        WHERE
+            r_clean.transaction_id IS NULL
+            OR 
+            r_append.cost != r_clean.cost
+    ': (psycopg2.errors.UndefinedFunction) operator does not exist: integer = text
+LINE 8:             AND r_append.charger_id = r_clean.charger_id
+                                            ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+
+[SQL: 
+        SELECT
+            r_append.*
+        FROM rev_source_1_append r_append
+
+        LEFT JOIN rev_source_1_clean r_clean
+            ON r_append.transaction_id = r_clean.transaction_id
+            AND r_append.charger_id = r_clean.charger_id
+            AND r_append.date_timestamp = r_clean.date_timestamp
+
+        WHERE
+            r_clean.transaction_id IS NULL
+            OR 
+            r_append.cost != r_clean.cost
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-22 11:56:23,857 - ERROR - Pipeline for Cleaning revenue Source 1 failed!
+Traceback (most recent call last):
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\clean_data_etl_pipeline.py", line 37, in run_pipeline_rev_src_1
+    load_db_rev_clean("rev_source_1_clean")
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Code\EV_CPO_V1\python_scripts\load_functions.py", line 192, in load_db_rev_clean
+    result = connection.execute(sql_command)
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\alexs\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InvalidColumnReference) there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+[SQL: 
+        INSERT INTO rev_source_1_clean (
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            dwh_date_added,
+            dwh_date_updated
+        )
+        SELECT 
+            transaction_id, 
+            date_timestamp, 
+            charger_id, 
+            cost, 
+            NOW(),
+            NULL
+        FROM rev_staging
+        ON CONFLICT (transaction_id, date_timestamp, charger_id) 
+        DO UPDATE SET
+            cost = EXCLUDED.cost,
+            dwh_date_updated = NOW()
+        WHERE rev_source_1_clean.cost IS DISTINCT FROM EXCLUDED.cost;
+    ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-05-22 12:00:23,117 - INFO - Starting ETL Pipeline
+2026-05-22 12:00:23,117 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-22 12:00:23,120 - INFO - Loading rev_source_1 into database
+2026-05-22 12:00:23,230 - INFO - Appending rev_source_1 to appended table
+2026-05-22 12:00:23,235 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-22 12:00:23,238 - INFO - Loading rev_source_2 into database
+2026-05-22 12:00:23,267 - INFO - Appending rev_source_2 to appended table
+2026-05-22 12:00:23,273 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-22 12:00:23,274 - INFO - Loading rev_source_3 into database
+2026-05-22 12:00:23,304 - INFO - Appending rev_source_3 to appended table
+2026-05-27 09:52:14,811 - INFO - Starting ETL Pipeline
+2026-05-27 09:52:14,812 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-27 09:52:14,822 - INFO - Loading rev_source_1 into database
+2026-05-27 09:52:15,036 - INFO - Appending rev_source_1 to appended table
+2026-05-27 09:52:15,040 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-27 09:52:15,050 - INFO - Loading rev_source_2 into database
+2026-05-27 09:52:15,097 - INFO - Appending rev_source_2 to appended table
+2026-05-27 09:52:15,102 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-27 09:52:15,114 - INFO - Loading rev_source_3 into database
+2026-05-27 09:52:15,152 - INFO - Appending rev_source_3 to appended table
+2026-05-27 09:57:44,861 - INFO - Starting ETL Pipeline
+2026-05-27 10:18:47,686 - INFO - Starting ETL Pipeline
+2026-05-27 10:18:47,687 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-27 10:18:47,690 - INFO - Loading rev_source_1 into database
+2026-05-27 10:18:47,803 - INFO - Appending rev_source_1 to appended table
+2026-05-27 10:18:47,807 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-27 10:18:47,809 - INFO - Loading rev_source_2 into database
+2026-05-27 10:18:47,841 - INFO - Appending rev_source_2 to appended table
+2026-05-27 10:18:47,844 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-27 10:18:47,847 - INFO - Loading rev_source_3 into database
+2026-05-27 10:18:47,878 - INFO - Appending rev_source_3 to appended table
+2026-05-27 10:18:53,104 - INFO - Starting ETL Pipeline
+2026-05-27 10:18:53,104 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-27 10:18:53,107 - INFO - Loading rev_source_1 into database
+2026-05-27 10:18:53,209 - INFO - Appending rev_source_1 to appended table
+2026-05-27 10:18:53,213 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-27 10:18:53,215 - INFO - Loading rev_source_2 into database
+2026-05-27 10:18:53,245 - INFO - Appending rev_source_2 to appended table
+2026-05-27 10:18:53,249 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-27 10:18:53,251 - INFO - Loading rev_source_3 into database
+2026-05-27 10:18:53,283 - INFO - Appending rev_source_3 to appended table
