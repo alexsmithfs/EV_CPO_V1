@@ -5,12 +5,11 @@ from extract_functions import extract_db_new_updated_rev
 import pandas as pd
 import numpy as np
 
-# Tranasformation Functions
 # _____________________________________________________________________________________________
+# Tranasformation Functions
 
-
-# Transformation for rev source 1
 # _________________________________________________________
+# Transformation for rev source 1
 
 def transform_rev_src_1(df):
     # Converting df to DataFrame to use pandas functions
@@ -24,8 +23,8 @@ def transform_rev_src_1(df):
 
     return df
 
-# Transformation for rev source 2
 # _________________________________________________________
+# Transformation for rev source 2
 
 def transform_rev_src_2(df):
     # Converting df to DataFrame to use pandas functions
@@ -39,8 +38,8 @@ def transform_rev_src_2(df):
 
     return df
 
-# Transformation for rev source 3
 # _________________________________________________________
+# Transformation for rev source 3
 
 def transform_rev_src_3(df):
     # Converting df to DataFrame to use pandas functions
@@ -66,8 +65,8 @@ def transform_rev_src_3(df):
     
     return cleaned_df
 
-# Function for transforming revnue sources that have already had the initial cleaning phase done
 # _________________________________________________________
+# Function for transforming revnue sources that have already had the initial cleaning phase done
 
 def transform_rev_data(df):
     # This function will be used to transform the revenue data from all 3 sources in the same way as they have the same structure. We can then call this function in the clean_data_etl_pipeline for all 3 sources instead of having 3 separate transformation functions.
@@ -88,8 +87,8 @@ def transform_rev_data(df):
 
 
 
-# Testing 
 # _____________________________________________________________________________________________
+# Testing 
 
 if __name__ == "__main__":
 

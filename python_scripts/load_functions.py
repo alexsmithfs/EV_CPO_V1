@@ -10,18 +10,18 @@ db_config = {
 }
 
 engine = create_engine(f"postgresql://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
-
-# Functions 
 # _____________________________________________________________________________________________
+# Functions 
 
-# Function to load data into SQL database
 # _________________________________________________________
+# Function to load data into SQL database
+
 def load_db(df, table_name):
     df.to_sql(table_name, engine, if_exists='replace', index=False)
 
-
-# Function for table rev_source_1 ONLY to append only new records from the main table to the append table
 # _________________________________________________________
+# Function for table rev_source_1 ONLY to append only new records from the main table to the append table
+
 def load_db_rev_src_1_append():
 
     table_name = "rev_source_1"
@@ -61,8 +61,9 @@ def load_db_rev_src_1_append():
         result = connection.execute(sql_command)
         print(f"Transfer complete. Appended {result.rowcount} new records from {table_name} to {table_name_append}.")
 
-# Function for table rev_source_2 ONLY to append only new records from the main table to the append table
 # _________________________________________________________
+# Function for table rev_source_2 ONLY to append only new records from the main table to the append table
+
 def load_db_rev_src_2_append():
 
     table_name = "rev_source_2"
@@ -102,8 +103,9 @@ def load_db_rev_src_2_append():
         result = connection.execute(sql_command)
         print(f"Transfer complete. Appended {result.rowcount} new records from {table_name} to {table_name_append}.")
 
-# Function for table rev_source_3 ONLY to append only new records from the main table to the append table
 # _________________________________________________________
+# Function for table rev_source_3 ONLY to append only new records from the main table to the append table
+
 def load_db_rev_src_3_append():
 
     table_name = "rev_source_3"
@@ -147,8 +149,8 @@ def load_db_rev_src_3_append():
         result = connection.execute(sql_command)
         print(f"Transfer complete. Appended {result.rowcount} new records from {table_name} to {table_name_append}.")
 
-# Function to load temporary staging table for revenue data for cleaning process
 # _________________________________________________________
+# Function to load temporary staging table for revenue data for cleaning process
 
 def load_db_rev_staging(df):
 
@@ -156,8 +158,10 @@ def load_db_rev_staging(df):
 
     df.to_sql(table_name, engine, if_exists='replace', index=False)
 
-# Function to load ONLY to append only new records into clean table 
 # _________________________________________________________
+# Function to load clean revenue data into final clean revenue data table, only appending new records and updating exisiting records
+# This function can be used for all  revenue sources as the cleaned data will have the same structure regardless of the source
+
 def load_db_rev_clean(table_name):
 
     staging_table = "rev_staging"
@@ -192,8 +196,8 @@ def load_db_rev_clean(table_name):
         result = connection.execute(sql_command)
         print(f"Transfer complete. Appended {result.rowcount} new records from {staging_table} to {table_name}.")
 
-# Testing 
 # _____________________________________________________________________________________________
+# Testing 
 
 if __name__ == "__main__":
 

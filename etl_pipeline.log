@@ -1387,3 +1387,34 @@ sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InvalidColumnReference) there 
 2026-05-22 12:00:23,273 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
 2026-05-22 12:00:23,274 - INFO - Loading rev_source_3 into database
 2026-05-22 12:00:23,304 - INFO - Appending rev_source_3 to appended table
+2026-05-27 09:52:14,811 - INFO - Starting ETL Pipeline
+2026-05-27 09:52:14,812 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-27 09:52:14,822 - INFO - Loading rev_source_1 into database
+2026-05-27 09:52:15,036 - INFO - Appending rev_source_1 to appended table
+2026-05-27 09:52:15,040 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-27 09:52:15,050 - INFO - Loading rev_source_2 into database
+2026-05-27 09:52:15,097 - INFO - Appending rev_source_2 to appended table
+2026-05-27 09:52:15,102 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-27 09:52:15,114 - INFO - Loading rev_source_3 into database
+2026-05-27 09:52:15,152 - INFO - Appending rev_source_3 to appended table
+2026-05-27 09:57:44,861 - INFO - Starting ETL Pipeline
+2026-05-27 10:18:47,686 - INFO - Starting ETL Pipeline
+2026-05-27 10:18:47,687 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-27 10:18:47,690 - INFO - Loading rev_source_1 into database
+2026-05-27 10:18:47,803 - INFO - Appending rev_source_1 to appended table
+2026-05-27 10:18:47,807 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-27 10:18:47,809 - INFO - Loading rev_source_2 into database
+2026-05-27 10:18:47,841 - INFO - Appending rev_source_2 to appended table
+2026-05-27 10:18:47,844 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-27 10:18:47,847 - INFO - Loading rev_source_3 into database
+2026-05-27 10:18:47,878 - INFO - Appending rev_source_3 to appended table
+2026-05-27 10:18:53,104 - INFO - Starting ETL Pipeline
+2026-05-27 10:18:53,104 - INFO - Extracting rev_source_1 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv
+2026-05-27 10:18:53,107 - INFO - Loading rev_source_1 into database
+2026-05-27 10:18:53,209 - INFO - Appending rev_source_1 to appended table
+2026-05-27 10:18:53,213 - INFO - Extracting rev_source_2 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv
+2026-05-27 10:18:53,215 - INFO - Loading rev_source_2 into database
+2026-05-27 10:18:53,245 - INFO - Appending rev_source_2 to appended table
+2026-05-27 10:18:53,249 - INFO - Extracting rev_source_3 from C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_3.csv
+2026-05-27 10:18:53,251 - INFO - Loading rev_source_3 into database
+2026-05-27 10:18:53,283 - INFO - Appending rev_source_3 to appended table

@@ -21,8 +21,8 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# rev_source 1 pipeline
 # _____________________________________________________________________________________________
+# rev_source 1 pipeline
 
 def run_pipeline_rev_src_1():
     try:
@@ -39,8 +39,8 @@ def run_pipeline_rev_src_1():
         # add the below line when we have encorporated Spark
         #sys.exit(1)
 
-# rev_source 2 pipeline
 # _____________________________________________________________________________________________
+# rev_source 2 pipeline
 
 def run_pipeline_rev_src_2():
     try:
@@ -57,8 +57,8 @@ def run_pipeline_rev_src_2():
         # add the below line when we have encorporated Spark
         #sys.exit(1)
 
-# rev_source 3 pipeline
 # _____________________________________________________________________________________________
+# rev_source 3 pipeline
 
 def run_pipeline_rev_src_3():
     try:

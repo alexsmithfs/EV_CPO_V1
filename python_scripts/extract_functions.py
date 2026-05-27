@@ -1,18 +1,17 @@
 import pandas as pd
 from sqlalchemy import create_engine, text
 
-
-# Functions
 # _____________________________________________________________________________________________
+# Functions
 
-# Extracting data from csv file
 # _________________________________________________________
+# Extracting data from csv file
 def extract_csv(file_path):
     raw_data = pd.read_csv(file_path)
     return raw_data
 
-# Extracting ONLY new and updated records from revenue tables in database for cleaning process
 # _________________________________________________________
+# Extracting ONLY new and updated records from revenue tables in database for cleaning process
 def extract_db_new_updated_rev(table_name):
 
     db_config = {

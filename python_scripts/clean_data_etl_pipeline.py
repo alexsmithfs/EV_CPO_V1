@@ -17,8 +17,8 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# rev_source 1 pipeline
 # _____________________________________________________________________________________________
+# rev_source 1 pipeline
 
 def run_pipeline_rev_src_1():
     try:
@@ -37,4 +37,50 @@ def run_pipeline_rev_src_1():
         # add the below line when we have encorporated Spark
         #sys.exit(1)
 
-run_pipeline_rev_src_1()
+# _____________________________________________________________________________________________
+# rev_source 2 pipeline
+
+def run_pipeline_rev_src_2():
+    try:
+        # Extracting only new and updated records from rev_source_2_append for cleaning process
+        new_data = extract_db_new_updated_rev("rev_source_2_append")
+        # Transforming the new/updated records to clean data
+        transformed_data = transform_rev_src_1(new_data)
+        cleaned_data = transform_rev_data(transformed_data)
+        # Loading cleaned data to staging table
+        load_db_rev_staging(cleaned_data)
+        # Loading only new records to clean table
+        load_db_rev_clean("rev_source_2_clean")
+
+    except Exception as e:
+        logger.error("Pipeline for Cleaning revenue Source 2 failed!", exc_info=True)
+        # add the below line when we have encorporated Spark
+        #sys.exit(1)
+
+# _____________________________________________________________________________________________
+# rev_source 3 pipeline
+
+def run_pipeline_rev_src_3():
+    try:
+        # Extracting only new and updated records from rev_source_3_append for cleaning process
+        new_data = extract_db_new_updated_rev("rev_source_3_append")
+        # Transforming the new/updated records to clean data
+        transformed_data = transform_rev_src_1(new_data)
+        cleaned_data = transform_rev_data(transformed_data)
+        # Loading cleaned data to staging table
+        load_db_rev_staging(cleaned_data)
+        # Loading only new records to clean table
+        load_db_rev_clean("rev_source_3_clean")
+
+    except Exception as e:
+        logger.error("Pipeline for Cleaning revenue Source 3 failed!", exc_info=True)
+        # add the below line when we have encorporated Spark
+        #sys.exit(1)
+
+# _____________________________________________________________________________________________
+
+if __name__ == "__main__":
+    logger.info("Starting ETL Pipeline")
+    run_pipeline_rev_src_1()
+    run_pipeline_rev_src_2()
+    run_pipeline_rev_src_3()
