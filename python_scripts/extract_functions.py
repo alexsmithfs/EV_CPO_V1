@@ -51,4 +51,3 @@ def extract_db_new_updated_rev(table_name):
 if __name__ == "__main__":
 
     print(extract_db_new_updated_rev("rev_source_1_append"))
-    print("hi")
