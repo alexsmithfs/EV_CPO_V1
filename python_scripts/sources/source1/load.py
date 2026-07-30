@@ -1,4 +1,3 @@
-
 import pandas as pd
 from sqlalchemy import create_engine, text
 
@@ -8,27 +7,15 @@ db_config = {
     "host": "localhost",
     "port": "5432",
     "database": "EV_CPO_DB"
-    }
-    
-engine = create_engine(f"postgresql://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
+}
 
+engine = create_engine(f"postgresql://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
 
 # _____________________________________________________________________________________________
 # Functions 
 
 # _________________________________________________________
-# Function to load raw data into SQL database, replacing the existing table if it exists
-
-def load_raw(df, table_name):
-    df.to_sql(
-        name=table_name,
-        con=engine,
-        if_exists="replace",  # Use 'replace' to drop and recreate, or 'append'
-        index=False
-    )
-
-# _________________________________________________________
-# Function to load data into temporary staging table for revenue data for cleaning process
+# Function to load temporary staging table for revenue data for cleaning process
 
 def load_db_rev_staging(df):
 
@@ -51,7 +38,7 @@ def load_db_rev_clean(table_name):
             date_timestamp, 
             charger_id, 
             cost, 
-            dwh_date_added,
+            NOW() ASdwh_date_added,
             dwh_date_updated
         )
         SELECT 
@@ -73,13 +60,3 @@ def load_db_rev_clean(table_name):
     with engine.begin() as connection:
         result = connection.execute(sql_command)
         print(f"Transfer complete. Appended {result.rowcount} new records from {staging_table} to {table_name}.")
-
-# _____________________________________________________________________________________________
-# Testing 
-
-if __name__ == "__main__":
-    # Example usage
-    file_path = R'C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv'
-    raw_data = pd.read_csv(file_path)
-    print(raw_data.head())
-    load_raw(raw_data, 'testing_table')

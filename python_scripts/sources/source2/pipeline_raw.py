@@ -15,11 +15,11 @@ from utils import generic_loads
 # _____________________________________________________________________________________________
 # Pipeline
 
-#file path for revenue source 1
-file_path = R'C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_1.csv'
+#file path for revenue source 2
+file_path = R'C:\Users\alexs\OneDrive\Documents\Data Engineering\EV_CPO_V1\Raw Data Files\Revenue_source_2.csv'
 
 # Extract
 raw_data = generic_extracts.extract_csv(file_path)
 
 # Load
-generic_loads.load_raw(raw_data, 'rev_source_1')
+generic_loads.load_raw(raw_data, 'rev_source_2')
