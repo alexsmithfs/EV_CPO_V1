@@ -47,5 +47,6 @@ def run_pipeline_rev_src_1():
 # _____________________________________________________________________________________________
 
 if __name__ == "__main__":
-    logger.info("Starting ETL Pipeline")
+    logger.info("Starting ETL Pipeline for revenue source 1...")
     run_pipeline_rev_src_1()
+    logger.info("Finished ETL Pipeline for revenue source 1")
