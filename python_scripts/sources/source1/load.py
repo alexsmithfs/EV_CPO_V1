@@ -38,7 +38,7 @@ def load_db_rev_clean(table_name):
             date_timestamp, 
             charger_id, 
             cost, 
-            NOW() ASdwh_date_added,
+            dwh_date_added,
             dwh_date_updated
         )
         SELECT 

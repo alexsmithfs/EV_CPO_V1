@@ -24,18 +24,18 @@ def extract_db_new_updated_rev(table_name):
     # This SQL command does the work internally in Postgres
     sql_query = f"""
         SELECT
-            r_append.*
-        FROM {raw_table} r_append
+            r_raw.*
+        FROM {raw_table} r_raw
 
         LEFT JOIN {clean_table} r_clean
-            ON r_append.transaction_id = r_clean.transaction_id
-            AND CAST(r_append.charger_id AS TEXT)= r_clean.charger_id
-            AND r_append.date_timestamp = r_clean.date_timestamp
+            ON r_raw.transaction_id = r_clean.transaction_id
+            AND CAST(r_raw.charger_id AS TEXT)= r_clean.charger_id
+            AND r_raw.date_timestamp = r_clean.date_timestamp
 
         WHERE
             r_clean.transaction_id IS NULL
             OR 
-            r_append.cost != r_clean.cost
+            r_raw.cost != r_clean.cost
     """
 
     rev_data = pd.read_sql_query(sql_query, engine)
