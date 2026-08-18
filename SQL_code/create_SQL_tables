@@ -31,53 +31,6 @@ CREATE TABLE IF NOT EXISTS rev_source_3 (
 	cost_type TEXT
 );
 
------ Incremental load versions -----
-
--- Option drop table if needing to edit table, but first use ALTER if possible!!
-DROP TABLE IF EXISTS rev_source_1_append;
-CREATE TABLE IF NOT EXISTS rev_source_1_append (
-	transaction_id TEXT,
-	date_timestamp TEXT,
-	charger_id INT,
-	cost FLOAT,
-	transaction_tag TEXT,
-	dwh_date_added TIMESTAMP,
-	dwh_date_updated TIMESTAMP
-);
-ALTER TABLE rev_source_1_append 
-ADD CONSTRAINT unique_tx_date_charger_1
-UNIQUE (transaction_id, date_timestamp, charger_id);
-
--- Option drop table if needing to edit table, but first use ALTER if possible!!
-DROP TABLE IF EXISTS rev_source_2_append;
-CREATE TABLE IF NOT EXISTS rev_source_2_append (
-	transaction_id TEXT,
-	date_timestamp TEXT,
-	charger_id INT,
-	cost FLOAT,
-	transaction_tag TEXT,
-	dwh_date_added TIMESTAMP,
-	dwh_date_updated TIMESTAMP
-);
-ALTER TABLE rev_source_2_append 
-ADD CONSTRAINT unique_tx_date_charger_2
-UNIQUE (transaction_id, date_timestamp, charger_id);
-
--- Option drop table if needing to edit table, but first use ALTER if possible!!
-DROP TABLE IF EXISTS rev_source_3_append;
-CREATE TABLE IF NOT EXISTS rev_source_3_append (
-	transaction_id TEXT,
-	date_timestamp TEXT,
-	charger_id INT,
-	cost FLOAT,
-	transaction_tag TEXT,
-	cost_type TEXT,
-	dwh_date_added TIMESTAMP,
-	dwh_date_updated TIMESTAMP
-);
-ALTER TABLE rev_source_3_append 
-ADD CONSTRAINT unique_tx_date_charger_3
-UNIQUE (transaction_id, date_timestamp, charger_id);
 
 ----- Clean data table versions -----
 
