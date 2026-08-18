@@ -4,9 +4,9 @@ import numpy as np
 
 
 # _________________________________________________________
-# Transformation for rev source 1
+# Transformation for rev source 2
 
-def transform_rev_src_1(df):
+def transform_rev_src_2(df):
     # Converting df to DataFrame to use pandas functions
     df = pd.DataFrame(df)
 
