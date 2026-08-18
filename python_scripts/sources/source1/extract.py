@@ -1,0 +1,49 @@
+import pandas as pd
+from sqlalchemy import create_engine, text
+
+# _____________________________________________________________________________________________
+# Functions
+
+# _________________________________________________________
+# Extracting ONLY new and updated records from revenue tables in database for cleaning process
+def extract_db_new_updated_rev(table_name):
+
+    db_config = {
+    "user": "postgres",
+    "password": "Alexsm97",
+    "host": "localhost",
+    "port": "5432",
+    "database": "EV_CPO_DB"
+    }
+
+    engine = create_engine(f"postgresql://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
+
+    raw_table = table_name
+    clean_table = raw_table + "_clean"
+
+    # This SQL command does the work internally in Postgres
+    sql_query = f"""
+        SELECT
+            r_raw.*
+        FROM {raw_table} r_raw
+
+        LEFT JOIN {clean_table} r_clean
+            ON r_raw.transaction_id = r_clean.transaction_id
+            AND CAST(r_raw.charger_id AS TEXT)= r_clean.charger_id
+            AND r_raw.date_timestamp = r_clean.date_timestamp
+
+        WHERE
+            r_clean.transaction_id IS NULL
+            OR 
+            r_raw.cost != r_clean.cost
+    """
+
+    rev_data = pd.read_sql_query(sql_query, engine)
+    
+    return rev_data
+
+# _____________________________________________________________________________________________
+# Testing 
+
+if __name__ == "__main__":
+    print(extract_db_new_updated_rev("rev_source_1"))

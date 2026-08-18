@@ -5,12 +5,6 @@ from sqlalchemy import create_engine, text
 # Functions
 
 # _________________________________________________________
-# Extracting data from csv file
-def extract_csv(file_path):
-    raw_data = pd.read_csv(file_path)
-    return raw_data
-
-# _________________________________________________________
 # Extracting ONLY new and updated records from revenue tables in database for cleaning process
 def extract_db_new_updated_rev(table_name):
 
@@ -24,30 +18,32 @@ def extract_db_new_updated_rev(table_name):
 
     engine = create_engine(f"postgresql://{db_config['user']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
 
-    append_table = table_name
-    clean_table = append_table.replace("_append", "_clean")
+    raw_table = table_name
+    clean_table = raw_table + "_clean"
 
     # This SQL command does the work internally in Postgres
     sql_query = f"""
         SELECT
-            r_append.*
-        FROM {append_table} r_append
+            r_raw.*
+        FROM {raw_table} r_raw
 
         LEFT JOIN {clean_table} r_clean
-            ON r_append.transaction_id = r_clean.transaction_id
-            AND CAST(r_append.charger_id AS TEXT)= r_clean.charger_id
-            AND r_append.date_timestamp = r_clean.date_timestamp
+            ON r_raw.transaction_id = r_clean.transaction_id
+            AND CAST(r_raw.charger_id AS TEXT)= r_clean.charger_id
+            AND r_raw.date_timestamp = r_clean.date_timestamp
 
         WHERE
             r_clean.transaction_id IS NULL
             OR 
-            r_append.cost != r_clean.cost
+            r_raw.cost != r_clean.cost
     """
 
     rev_data = pd.read_sql_query(sql_query, engine)
     
     return rev_data
 
-if __name__ == "__main__":
+# _____________________________________________________________________________________________
+# Testing 
 
-    print(extract_db_new_updated_rev("rev_source_1_append"))
+if __name__ == "__main__":
+    print(extract_db_new_updated_rev("rev_source_2"))
